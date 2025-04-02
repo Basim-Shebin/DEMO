@@ -1,0 +1,15 @@
+update book_issues set librarianid=1 where bookid in (1,2);
+
+
+update book_issues set librarianid=1 where bookid in (3,4);
+
+
+update book_issues set librarianid=1 where bookid in (5,6);
+
+5. select book_issues.bookid,Students.name,books.title,librarians.name from book_issues natural join books natural join Students  join librarians on librarians.librarianid=book_issues.librarianid;
+
+
+6. select librarians.librarianid,librarians.name,count(book_issues.bookid) as NO_OF_BOOKS from book_issues join librarians on librarians.librarianid=book_issues.librarianid group by librarians.librarianid,librarians.name;
+
+
+7. select librarians.librarianid,librarians.name from librarians left join book_issues on librarians.librarianid=book_issues.librarianid group by librarians.librarianid having count(bookid)=0;
