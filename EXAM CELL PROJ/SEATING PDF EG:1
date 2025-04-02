@@ -1,0 +1,106 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# Sample Data
+college_name = "M E S COLLEGE OF ENGINEERING\nKUTTIPPURAM"
+semester = "S7 B.Tech (S,FE)"
+date = "02-02-2025 (FN)"
+time = "9:30 AM to 12:30 AM"
+scheme = "KTU"
+format_no = "MESCE/QMR/72"
+
+subjects = [
+    ("Advanced Control Systems (ECT401)", [
+        ("A1", "SALMANUL FARIS P P (MES21EC032)", "P"),
+        ("A2", "SARATH C NAIR (MES20EC031)", "P"),
+        ("A3", "SUPAL SURESH (MES20EC037)", "P"),
+        ("A4", "VINOOPKUMAR V I (MES21EC033)", "P"),
+        ("A5", "AKTHAR HASHIM (MES19EC005)", "P")
+    ], "105 (B2)"),
+    
+    ("Microwaves and Antennas (ECT401)", [
+        ("A6", "ASWAJITH T C (MES21EC024)", "P"),
+        ("A7", "DIOUF MUHAMMED (MES21EC008)", "A"),
+        ("A8", "MOHAMMED SHIBIL Y K (MES21EC022)", "P"),
+        ("A9", "MUHAMMED SHIFAN (MES20EC023)", "P"),
+        ("A10", "MUHAMMED SHINAS (MES20EC024)", "P")
+    ], "MAIN BLOCK"),
+]
+
+absentees = {
+    "ECT401": ["MES19EC005", "LMGS21EC042", "MES20EC018", "MES20EC024", "MES20EC023", "MES20EC039", "MES21EC008", "MES21EC022", "MES21EC027"]
+}
+
+# Function to create PDF
+def create_pdf(filename):
+    c = canvas.Canvas(filename, pagesize=A4)
+    width, height = A4
+    
+    c.setFont("Helvetica-Bold", 14)
+    c.drawCentredString(width / 2, height - 50, college_name)
+    
+    c.setFont("Helvetica", 12)
+    c.drawString(50, height - 80, f"SEMESTER: {semester}")
+    c.drawString(300, height - 80, f"DATE: {date}")
+    c.drawString(50, height - 100, f"SCHEME: {scheme}")
+    c.drawString(300, height - 100, f"TIME: {time}")
+    c.drawString(50, height - 120, f"FORMAT No: {format_no}")
+
+    y_position = height - 160
+
+    # Table Headers
+    c.setFont("Helvetica-Bold", 10)
+    headers = ["SI No", "Seat No", "Register No - Name", "P/A", "Hall"]
+    col_widths = [40, 60, 250, 40, 100]
+    x_positions = [50, 90, 150, 400, 450]
+
+    for i, header in enumerate(headers):
+        c.drawString(x_positions[i], y_position, header)
+    
+    y_position -= 20
+    c.line(50, y_position + 10, 550, y_position + 10)  # Header Line
+
+    # Subject-wise student listing
+    c.setFont("Helvetica", 10)
+    si_no = 1
+    for subject, students, hall in subjects:
+        c.setFont("Helvetica-Bold", 10)
+        c.drawString(50, y_position, subject)
+        y_position -= 15
+        c.setFont("Helvetica", 10)
+        
+        for seat_no, reg_name, status in students:
+            c.drawString(x_positions[0], y_position, str(si_no))
+            c.drawString(x_positions[1], y_position, seat_no)
+            c.drawString(x_positions[2], y_position, reg_name)
+            c.drawString(x_positions[3], y_position, status)
+            c.drawString(x_positions[4], y_position, hall)
+            y_position -= 15
+            si_no += 1
+        
+        y_position -= 10
+
+    # Absentees Section
+    c.setFont("Helvetica-Bold", 10)
+    c.drawString(50, y_position, "ABSENTEES STATEMENT")
+    y_position -= 15
+    c.line(50, y_position + 10, 550, y_position + 10)
+
+    c.setFont("Helvetica", 10)
+    for subject, absent_list in absentees.items():
+        c.drawString(50, y_position, f"SUBJECT CODE: {subject}")
+        c.drawString(150, y_position, f"REGISTER NUMBER OF ABSENTEES: {', '.join(absent_list)}")
+        y_position -= 15
+
+    # Signature Section
+    c.setFont("Helvetica", 10)
+    c.drawString(50, y_position - 20, "Signature of Invigilator:")
+    
+    # Save PDF
+    c.save()
+
+# Generate PDF
+create_pdf("Seating_Layout.pdf")
+print("PDF Generated Successfully!")
