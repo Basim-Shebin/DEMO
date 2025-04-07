@@ -1,4 +1,6 @@
 1. 
+1.1. alter table books add constraint fk_publisherid foreign key (publisherid) references publishers(publisherid);
+
 
 2. create table publishers(publisherid int auto_increment primary key,name varchar(50) unique not null,address varchar(100));
 
@@ -6,6 +8,13 @@
 
 
 4. create table issues(issueid int auto_increment primary key,memberid int,accno int,issuedate date,duedate date);
+4.1. alter table issues add constraint fk_memberid foreign key (memberid) references members(memberid);
+4.2. alter table issues add constraint fk_accno foreign key (accno) references books(accno);
+
 
 
 5. create table returns(returnid int auto_increment primary key,memberid int,accno int,returndate date,fine int default 0 check (fine>=0));
+5.1. alter table returns add constraint fk_rmemberid foreign key (memberid) references members(memberid);
+5.2. alter table returns add constraint fk_raccno foreign key (accno) references books(accno);
+
+
