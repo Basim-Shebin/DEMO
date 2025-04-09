@@ -96,7 +96,7 @@ public class ElectricCarArrObjects {
         System.out.println("\nElectric Car Details:\n");
         for (ElectricCar car : cars) {
             car.displayElectricCarInfo();
-            System.out.println("---------------------------");
+            System.out.println("\n");
         }
     }
 }
