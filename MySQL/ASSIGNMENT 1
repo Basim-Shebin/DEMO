@@ -1,4 +1,5 @@
-1. 
+
+1. create table books (accno int auto_increment primary key, title varchar(100) unique not null, author varchar(50) not null, price float(6, 2), type enum('lending', 'reference'), availability enum('yes', 'no'), publisherid int);
 1.1. alter table books add constraint fk_publisherid foreign key (publisherid) references publishers(publisherid);
 
 
@@ -16,5 +17,55 @@
 5. create table returns(returnid int auto_increment primary key,memberid int,accno int,returndate date,fine int default 0 check (fine>=0));
 5.1. alter table returns add constraint fk_rmemberid foreign key (memberid) references members(memberid);
 5.2. alter table returns add constraint fk_raccno foreign key (accno) references books(accno);
+
+
+INSERT INTO publishers (name, address)
+VALUES
+('keralabooks', '12 tech avenue, ernakulam, kerala, india'),
+('malayalapress', '34 dev street, trivandrum, kerala, india'),
+('keralapub', '56 ml lane, calicut, kerala, india'),
+('datavillage', '78 datastreet, kollam, kerala, india'),
+('keralatechbooks', '90 cyber way, kochi, kerala, india');
+
+
+INSERT INTO books (title, author, price, type, availability, publisherid)
+VALUES
+('introduction to quantum algorithms', 'arun kumar', 15.99, 'lending', 'yes', 1),
+('machine learning basics', 'vijay nair', 18.50, 'reference', 'no', 2),
+('ai for beginners', 'anu joseph', 20.99, 'lending', 'yes', 3),
+('the art of data structures', 'devi nair', 12.75, 'reference', 'no', 4),
+('blockchain fundamentals', 'ajay menon', 17.00, 'lending', 'yes', 5);
+
+
+
+INSERT INTO members (name, address, type)
+VALUES
+('aravind pillai', '101 tech park, ernakulam, kerala, india', 'staff'),
+('geetha rajan', '202 code lane, trivandrum, kerala, india', 'student'),
+('prakash kumar', '303 dev road, calicut, kerala, india', 'staff'),
+('sreelatha menon', '404 data street, kollam, kerala, india', 'student'),
+('vivek nair', '505 tech avenue, kochi, kerala, india', 'student');
+
+
+
+INSERT INTO issues (memberid, accno, issuedate, duedate)
+VALUES
+(1, 6, '2025-04-01', '2025-04-15'),
+(2, 7, '2025-04-03', '2025-04-17'),
+(3, 8, '2025-04-05', '2025-04-19'),
+(4, 9, '2025-04-07', '2025-04-21'),
+(5, 10, '2025-04-09', '2025-04-23');
+
+
+
+
+INSERT INTO returns (memberid, accno, returndate, fine)
+VALUES
+(1, 6, '2025-04-14', 0),
+(2, 7, '2025-04-16', 0),
+(3, 8, '2025-04-18', 0),
+(4, 9, '2025-04-20', 5),
+(5, 10, '2025-04-22', 0);
+
 
 
