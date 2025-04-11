@@ -51,7 +51,6 @@ alter table returns add constraint fk_raccno foreign key (accno) references book
 
 insert into publishers (name, address) values ('keralabooks', '12 tech avenue, ernakulam, kerala, india'), ('malayalapress', '34 dev street, trivandrum, kerala, india'), ('keralapub', '56 ml lane, calicut, kerala, india'), ('datavillage', '78 datastreet, kollam, kerala, india'), ('keralatechbooks', '90 cyber way, kochi, kerala, india');
 
-
 --
 -- Dumping data for table books
 --
