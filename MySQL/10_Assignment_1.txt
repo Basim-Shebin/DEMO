@@ -1,0 +1,88 @@
+-- 
+-- Roll No: 10
+-- Name: Basim Shebin K P
+-- Program: Assignment 1
+-- 
+
+
+--
+-- Table structure for table books
+--
+
+create table books (accno int auto_increment primary key, title varchar(100) unique not null, author varchar(50) not null, price float(6, 2), type enum('lending', 'reference'), availability enum('yes', 'no'), publisherid int);
+
+alter table books add constraint fk_publisherid foreign key (publisherid) references publishers(publisherid);
+
+--
+-- Table structure for table publishers
+--
+
+create table publishers(publisherid int auto_increment primary key,name varchar(50) unique not null,address varchar(100));
+
+--
+-- Table structure for table members
+--
+
+create table members(memberid int auto_increment primary key,name varchar(50) not null,address varchar(100),type enum ('staff','student'));
+
+--
+-- Table structure for table issues
+--
+
+create table issues(issueid int auto_increment primary key,memberid int,accno int,issuedate date,duedate date);
+
+alter table issues add constraint fk_memberid foreign key (memberid) references members(memberid);
+
+alter table issues add constraint fk_accno foreign key (accno) references books(accno);
+
+--
+-- Table structure for table returns
+--
+
+create table returns(returnid int auto_increment primary key,memberid int,accno int,returndate date,fine int default 0 check (fine>=0));
+
+alter table returns add constraint fk_rmemberid foreign key (memberid) references members(memberid);
+
+alter table returns add constraint fk_raccno foreign key (accno) references books(accno);
+
+--
+-- Dumping data for table publishers
+--
+
+insert into publishers (name, address) values ('keralabooks', '12 tech avenue, ernakulam, kerala, india'), ('malayalapress', '34 dev street, trivandrum, kerala, india'), ('keralapub', '56 ml lane, calicut, kerala, india'), ('datavillage', '78 datastreet, kollam, kerala, india'), ('keralatechbooks', '90 cyber way, kochi, kerala, india');
+
+
+--
+-- Dumping data for table books
+--
+
+insert into books (title, author, price, type, availability, publisherid) values ('introduction to quantum algorithms', 'arun kumar', 15.99, 'lending', 'yes', 1), ('machine learning basics', 'vijay nair', 18.50, 'reference', 'no', 2), ('ai for beginners', 'anu joseph', 20.99, 'lending', 'yes', 3), ('the art of data structures', 'devi nair', 12.75, 'reference', 'no', 4), ('blockchain fundamentals', 'ajay menon', 17.00, 'lending', 'yes', 5);
+
+
+--
+-- Dumping data for table members
+--
+
+insert into members (name, address, type) values ('aravind pillai', '101 tech park, ernakulam, kerala, india', 'staff'), ('geetha rajan', '202 code lane, trivandrum, kerala, india', 'student'), ('prakash kumar', '303 dev road, calicut, kerala, india', 'staff'), ('sreelatha menon', '404 data street, kollam, kerala, india', 'student'), ('vivek nair', '505 tech avenue, kochi, kerala, india', 'student');
+
+
+--
+-- Dumping data for table issues
+--
+
+insert into issues (memberid, accno, issuedate, duedate) values (1, 6, '2025-04-01', '2025-04-15'), (2, 7, '2025-04-03', '2025-04-17'), (3, 8, '2025-04-05', '2025-04-19'), (4, 9, '2025-04-07', '2025-04-21'), (5, 10, '2025-04-09', '2025-04-23');
+
+
+--
+-- Dumping data for table returns
+--
+
+insert into returns (memberid, accno, returndate, fine) values (1, 6, '2025-04-14', 0), (2, 7, '2025-04-16', 0), (3, 8, '2025-04-18', 0), (4, 9, '2025-04-20', 5), (5, 10, '2025-04-22', 0);
+
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
