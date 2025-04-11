@@ -9,7 +9,7 @@
 -- Table structure for table books
 --
 
-create table books (accno int auto_increment primary key, title varchar(100) unique not null, author varchar(50) not null, price float(6, 2), type enum('lending', 'reference'), availability enum('yes', 'no'), publisherid int);
+create table books (accno int auto_increment primary key, title varchar(100) unique not null, author varchar(50) not null, price decimal(6, 2), type enum('lending', 'reference'), availability enum('yes', 'no'), publisherid int);
 
 alter table books add constraint fk_publisherid foreign key (publisherid) references publishers(publisherid);
 
