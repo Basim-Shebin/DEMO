@@ -1,0 +1,63 @@
+STORED PROCEDURES IN MY SQL
+1. Procedures
+2. Functions
+3. Triggers
+4. Cursors
+
+	PROCEDURES
+syntax: CREATE PROCEDURE <NAME> 
+	BEGIN
+		SQL stmnt;
+	END			##use begin and end only if have more than 1 statment
+
+Eg: 	#select * from employee # to convert#
+	CREATE PROCEDURE listemployees()
+	BEGIN
+		SELECT * from Employee;    # we have to make sure that ; should not be execute condition so use delimitetr(// or $$)
+	END
+	
+	DELIMITER //
+	CREATE PROCEDURE listemployees()
+	BEGIN
+		SELECT * from Employee;    # we have to make sure that ; should not be execute condition so use delimitetr(// or $$)
+	END//
+	DELIMITER ;   # to stop using the given delimiter and convert back to ;
+	
+	**Use CALL statement to call the SQL procedure
+	Eg: CALL listemployees;
+	
+	PROCEDURE with PARAMETERS (IN and OUT)
+	IN=input-to give
+	OUT=output-to get
+	INOUT-to both input and output
+	IN Eg:
+		create procedure listaccnobook(IN acc_no int)
+    		begin
+     		select * from books where accno=acc_no;
+    		end //
+    		
+    	OUT Eg:	create procedure listbooknamewithaccno(IN acc_no int,OUT bname varchar(100))
+    		begin
+    		select title into bname from books where accno=acc_no;
+    		end //
+    	
+    	INOUT Eg:
+    		mysql> create procedure listbooknamewithaccno(IN acc_no int,OUT bname varchar(100))
+    -> begin
+    -> select title into bname from books where accno=acc_no;
+    -> end //
+    
+    	
+    	
+    	FUNCTION
+
+syntax : DELIMITER //
+	 CREATE FUNCTION <FNAME>(para1,para2)
+	 RETURNS <datatype>
+	 NOSQL/ READS SQL DATA/ DETERMINISTIC #use any of these
+	 BEGIN
+	 	DECLARE <valname> <datatype>
+	 	SQL Statements
+	 	RETURN <val_name>
+	 END //
+	 DELIMITER ;
