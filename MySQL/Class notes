@@ -4,7 +4,10 @@ STORED PROCEDURES IN MY SQL
 3. Triggers
 4. Cursors
 
-	PROCEDURES
+
+
+--------------PROCEDURES----------------------
+
 syntax: CREATE PROCEDURE <NAME> 
 	BEGIN
 		SQL stmnt;
@@ -49,7 +52,7 @@ Eg: 	#select * from employee # to convert#
     
     	
     	
-    	FUNCTION
+--------------FUNCTION-----------------------------
 
 syntax : DELIMITER //
 	 CREATE FUNCTION <FNAME>(para1,para2)
@@ -61,3 +64,41 @@ syntax : DELIMITER //
 	 	RETURN <val_name>
 	 END //
 	 DELIMITER ;
+	 
+	 
+--------------TRIGGERS--------------
+
+-used to automatically call when certain events happen in the database and not by the user
+The 3 events are:
+	*INSERT
+	*UPDATE
+	*DELETE
+	
+-Action is used to determine when the trigger should take place
+2 types of action:
+	*AFTER
+	*BEFORE
+	 
+	 Eg:	BEFORE INSERT
+	 	AFTER INSERT
+	 	BEFORE UPDATE
+	 	    "
+syntax : CREATE TRIGGER <Trigger_name>
+	 <after/before> <insert/update/delete> ON <table name>
+	 BEGIN
+	 	#instructons
+	 END
+	 
+	 -opertators used inside trigger:
+	 	*NEW(not applicable for delete)
+	 	*OLD(not applicable for insert) 
+	 	    	 	
+	 Eg:p
+	 
+
+	 1.create a function to display the price of a book
+	 2.create a function to calculate and returns the total fine amount
+	 3.create a trigger to set availability to no when a book is issued
+	 
+	 
+	 
