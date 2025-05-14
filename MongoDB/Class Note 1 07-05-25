@@ -78,12 +78,25 @@ show with limit--db.student.find().limit(2) $ show first 2 key documents
 
 ---CONSTRAINTS----
 
-----Adding documents to an array in collections---
+----Adding documents to an array in collections----
 
 *use PUSH() operator
 Eg:
 	db.order.updateOne({id:1},{push:{colors:"blue"}})
+	
+	
+----Aggregate functions in MongoDB----
 
+PIPELINE OF OPERTATIONS
+
+*here the output of a previous operation will be ysed for next operations
+
+$match
+$project
+4filter
+$group
+$sort
+$limit
 
 
 
