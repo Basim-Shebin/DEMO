@@ -70,13 +70,24 @@ compared to MySQL
  *deleteOne()--used to delete keys
  	Eg:db.student.deleteOne({rollno:1})
 
----oRDER BY usoing find----
+---ORDER BY usoing find----
 
 sorting--db.student.find().sort({name:1}) ##1=asc,-1=desc
 counting--db.student.find().count()
 show with limit--db.student.find().limit(2) $ show first 2 key documents
 
 ---CONSTRAINTS----
+
+----Adding documents to an array in collections---
+
+*use PUSH() operator
+Eg:
+	db.order.updateOne({id:1},{push:{colors:"blue"}})
+
+
+
+
+
 
 
 
